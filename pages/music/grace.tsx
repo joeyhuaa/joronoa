@@ -1,7 +1,17 @@
+import { useState } from 'react'
+import Sidebar from '@/components/Sidebar'
 import background from '../../public/assets/Grace-Art.jpg'
 
+const summary = 
+  "GRACE is a song that explores internal struggle and redemption.\
+  It captures one's journey in battling personal demons while seeking peace and holding on to faith in God's love.\
+  The lyrics touch on addiction, guilt, the desire for change, and the search for forgiveness—both in oneself and in God.\
+  It expresses the experience of feeling trapped in a negative cycle but still holding on to hope; the human experience of admitting one's faults\
+  and the pain of living with them, while finding comfort in God's grace despite one's shortcomings.\
+  Ultimately, the message of the song is that there is GRACE for everyone, and accepting that GRACE allows you to accept yourself as who you are."
+
 export default function Grace() {
-  console.log(background)
+  const [section, setSection] = useState('summary')
   return (
     <div className="full-background" style={{
       backgroundImage: `url(${background.src})`,
@@ -9,22 +19,100 @@ export default function Grace() {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
     }}>
+      <Sidebar 
+        sections={['summary', 'lyrics']} 
+        handleClick={selection => setSection(selection)}
+        selected={section}
+      />
       <div className="content">
-        <div className='inline-block'>
-          <h1 style={{fontFamily: 'Tilt Prism', display: 'inline', fontSize: '70px'}}>GRACE</h1>
-          <span style={{marginLeft: '10px'}}>(feat. Halim)</span>
+        <iframe 
+          src="https://open.spotify.com/embed/track/0WwvJ19ukSTeDHwdV0N4eC?utm_source=generator" 
+          width="100%" 
+          style={{borderRadius: '12px', marginTop: '0px'}}
+          height="78"   
+          frameBorder="0" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy"
+        />
+        <h1 style={{fontFamily: 'Tilt Prism', display: 'inline', fontSize: '70px'}}>GRACE</h1>
+        <span style={{marginLeft: '10px'}}>(feat. Halim)</span>
+        <div className='scrollable-content'>
+          {section === 'summary' && <p>{summary}</p>}
+          {section === 'lyrics' && (
+            <p>
+              Feedin me shit human centipede<br />
+              I wanna be a better me<br />
+              World filled methamphetamine<br />
+              You know what i mean<br /><br />
+
+              You made a whole mess of me<br />
+              My past keep stressing me<br />
+              Sneezing got allergies<br />
+              God He keep blessing me<br /><br />
+
+              Lately u been testing me<br />
+              So heavily<br />
+              Just want ur sweet love in me<br />
+              No questioning<br /><br />
+
+              Feedin me shit human centipede<br />
+              I wanna be a better me<br />
+              World filled methamphetamine<br />
+              You know what i mean<br /><br />
+
+              I got bad dreams<br />
+              Im feelin like a fiend<br />
+              Demons they fight me<br />
+              I just bob n weave<br /><br />
+
+              Shine bright like lightning<br />
+              God gimme peace<br />
+              Money don’t love me<br />
+              So I don’t love cheese<br /><br />
+
+              God up above me<br />
+              Im down on my knees<br />
+              I know He loves me<br />
+              But how could it be?<br /><br />
+
+              I need somebody<br />
+              To help me believe<br />
+              Sin and repentance<br />
+              Rinse and repeat<br /><br />
+
+              Feedin me shit human centipede<br />
+              I wanna be a better me<br />
+              World filled methamphetamine<br />
+              You know what i mean<br /><br />
+
+              You made a whole mess of me<br />
+              My past keep stressing me<br />
+              Sneezing got allergies<br />
+              God He keep blessing me<br /><br />
+
+              I can’t believe all this time<br />
+              you been here with me<br />
+              The way you love me, so unlike me<br />
+              you believe in me<br /><br />
+
+              You believe in me (So I believe in me)<br /><br />
+
+              I fall down and repent<br />
+              You rinse and I repeat<br />
+              Can’t help but feel the guilt<br />
+              Can’t tell you everything<br /><br />
+
+              I’ve sobered up before, made a million promises<br />
+              Feel like I’ve never learned what true forgiveness is<br />
+              Truth is I’m just sick<br />
+              feel so villainous<br />
+              All my demons left a mark inside my consciousness<br />
+              Why my life a mess?<br />
+              But you never miss<br />
+              I was counting pennies but you don’t count my sins<br />
+            </p>
+          )}
         </div>
-        <p>
-        "GRACE" is a song that touches on themes of personal struggles, redemption, spirituality, and the search for meaning. The lyrics explore the internal conflicts and challenges faced by the speaker, as well as their relationship with a higher power or divine presence. The song delves into the complexity of human experiences, including addiction, guilt, the desire for change, and the search for forgiveness.
-
-The repeated mention of "feeding me shit," "methamphetamine," and "human centipede" alludes to a sense of being trapped in negative cycles, both internally and externally. The speaker expresses a desire for self-improvement and a longing to be a better version of themselves, all while grappling with the weight of their past mistakes. The imagery of sneezing and allergies juxtaposed with blessings from God adds a layer of contrast between struggles and gratitude.
-
-The lyrics also showcase the speaker's vulnerability and introspection. The lines "I got bad dreams, I'm feeling like a fiend" and "Demons they fight me, I just bob n weave" depict inner battles and the attempt to overcome personal demons. The reference to God offering peace and the longing for belief underscore the spiritual journey the speaker is undergoing.
-
-The shift in tone toward the end of the song reflects a moment of realization and hope. The lines "I can't believe all this time you been here with me / The way you love me, so unlike me, you believe in me" suggest the discovery of unconditional support and love from a divine presence. This realization prompts the speaker to believe in themselves as well, signifying a potential turning point in their struggle.
-
-Overall, "GRACE" encapsulates the internal struggles, yearning for change, and ultimate search for acceptance and redemption that are universal to the human experience. The song resonates with themes of faith, personal growth, and the power of transformation despite the challenges faced.
-        </p>
       </div>
     </div>
   )
