@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Pics from '@/components/Pics'
 import Link from 'next/link'
+import Sidebar from '@/components/Sidebar'
+import { useState } from 'react'
 
 export default function Home() {
+  const [section, setSection] = useState('summary')
+
   return (
     <>
       <Head>
@@ -12,9 +16,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Pics />
-        <Link style={{position: 'absolute', left: 100, top: 200}} href='/projects'>projects</Link>
-        <Link style={{position: 'absolute', right: 100, top: 200}} href='/music'>music</Link>
       </main>
     </>
   )
