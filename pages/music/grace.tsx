@@ -20,7 +20,7 @@ export default function Grace() {
       backgroundRepeat: 'no-repeat'
     }}>
       <Sidebar 
-        sections={['summary', 'lyrics']} 
+        sections={['summary', 'lyrics', 'video']} 
         handleClick={selection => setSection(selection)}
         selected={section}
       />
