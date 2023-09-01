@@ -22,6 +22,6 @@ export default function Pics() {
   }
 
   return (
-    <img id='random-pic' src={pics[picIndex].src} alt='pic' onClick={changePic} width={250} height={250} />
+    <img id='random-pic' src={pics[picIndex].src} alt='pic' onClick={changePic} width={200} height={200} />
   )
 }

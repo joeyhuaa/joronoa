@@ -1,0 +1,16 @@
+#main-menu {
+  height: 90vh;
+  border-right: solid 1px rgb(84, 84, 106);
+  flex: 25%;
+}
+
+.linked-sidebar {
+  height: 50vh;
+  width: 300px;
+  position: absolute;
+  /* border: solid 1px white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
