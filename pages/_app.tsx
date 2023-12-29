@@ -37,11 +37,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <h1 className='text-6xl/loose pl-5'>joey hua</h1>
           </Link>
           <LinkedSidebar 
-            sections={['about', 'projects', 'music']}
+            sections={['about', 'code_projects', 'music']}
             selected={section}
           />
         </div>
-        <div style={{flex: '75%', padding: '30px'}}>
+        <div style={{flex: '75%'}}>
           <Component {...pageProps} />
         </div>
       </div>

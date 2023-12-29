@@ -1,4 +1,4 @@
-export default function Projects() {
+export default function CodeProjects() {
   return (
     <div>
       Projects babyyyyy
