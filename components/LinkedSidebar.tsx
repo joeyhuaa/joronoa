@@ -11,6 +11,7 @@ export default function LinkedSidebar({ sections, handleClick, selected }: Props
     <div className="linked-sidebar">
       {sections.map(section => (
         <p 
+          key={`${section}-link`}
           onClick={() => handleClick && handleClick(section)}
           style={{ color: selected === section ? 'white' : 'gray' }}
         >

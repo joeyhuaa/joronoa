@@ -6,7 +6,7 @@ export default function Music() {
     <div className="section">
       <h1 className="text-4xl">Music</h1>
       <br />
-      {[1,1,1].map(x => (
+      {/* {[1,1,1].map(x => (
         <div className="mb-4">
           <MusicPostCard 
             title='GRACE (feat. Halim)'
@@ -15,7 +15,7 @@ export default function Music() {
             link='/music/grace'
           />
         </div>
-      ))}
+      ))} */}
     </div>
   )
 }
