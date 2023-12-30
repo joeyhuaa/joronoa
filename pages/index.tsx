@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import Pics from '@/components/Pics'
 import Link from 'next/link'
 import Sidebar from '@/components/Sidebar'
@@ -16,7 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main style={{display:'flex'}}>
         <div className='section'>
           <Career>musical artist</Career>
           <Career>programmer</Career>
@@ -30,6 +31,10 @@ export default function Home() {
           {/* <Identity>follower of Christ</Identity> */}
           <Hobby>food lover</Hobby>
           <Hobby>hooper</Hobby>
+        </div>
+        <div className='section'>
+          {/* <ProfilePics /> */}
+          <Pics />
         </div>
       </main>
     </>
@@ -53,12 +58,12 @@ const Race = styled(Heritage)`
 const HumanRole = styled.h1`
   color: #52C5FF
 `
-
 const Identity = styled.h1`
   color: #4046FF
 `
-
 const Hobby = styled.h1`
   color: #FFF79C
+`
+const ProfilePics = styled(Image)`
 `
 

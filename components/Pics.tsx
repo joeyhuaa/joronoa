@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 
-import supernova_art from '../public/assets/supernova.jpg'
-import soulfection_art from '../public/assets/soulfection.jpg'
-import prof_pic from '../public/assets/prof-pic-square.jpg'
-import headlightsnight from '../public/assets/headlightsnight.jpg'
-import tylerbgb from '../public/assets/tylerbluegreenblack.jpg'
-import tylerbp from '../public/assets/tylerbluepinkoutline.jpg'
-import tylerog from '../public/assets/tylerorangegreenoutline.jpg'
-import tylerrb from '../public/assets/tylerredblkpoints.jpg'
+import joey1 from '../public/assets/joey1.jpg'
+import joey2 from '../public/assets/joey2.jpeg'
+//! import joey3 from '../public/assets/joey3.jpg'
+//! import joey4 from '../public/assets/joey4.jpg'
 import { StaticImageData } from 'next/image'
 
-const pics: StaticImageData[] = [prof_pic, tylerbgb, tylerog, tylerbp, tylerrb]
+const pics: StaticImageData[] = [
+  joey1,
+  joey2,
+  // joey3,
+  // joey4,
+]
 
 export default function Pics() {
   let [picIndex, setPicIndex] = useState(0)
@@ -22,6 +23,6 @@ export default function Pics() {
   }
 
   return (
-    <img id='random-pic' src={pics[picIndex].src} alt='pic' onClick={changePic} width={200} height={200} />
+    <img id='random-pic' src={pics[picIndex].src} alt='pic' onClick={changePic} width={300} />
   )
 }

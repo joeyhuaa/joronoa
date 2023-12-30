@@ -1,15 +1,15 @@
 import Link from "next/link"
 
 interface Props {
-  sections: string[],
-  handleClick?: (section: string) => void
+  links: string[],
   selected: string,
+  handleClick?: (section: string) => void,
 }
 
-export default function LinkedSidebar({ sections, handleClick, selected }: Props) {
+export default function LinkedSidebar({ links, handleClick, selected }: Props) {
   return (
     <div className="linked-sidebar">
-      {sections.map(section => (
+      {links.map(section => (
         <p 
           key={`${section}-link`}
           onClick={() => handleClick && handleClick(section)}

@@ -1,6 +1,6 @@
 export default function CodeProjects() {
   return (
-    <div>
+    <div className="section">
       Projects babyyyyy
     </div>
   )
