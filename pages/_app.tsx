@@ -12,6 +12,7 @@ import LinkedSidebar from '@/components/LinkedSidebar'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [section, setSection] = useState('')
+  const [name, setName] = useState('joronoa')
   const router = useRouter();
 
   useEffect(() => {
@@ -34,10 +35,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <div style={{display: 'flex'}}>
         <div id='main-menu'>
           <Link href='/' onClick={() => handleClick('')}>
-            <h1 className='text-6xl/loose pl-5'>joey hua</h1>
+            <h1 className='text-6xl/loose pl-5' onMouseEnter={() => setName('joey 花')} onMouseLeave={() => setName('joronoa')}>
+              {name}
+            </h1>
           </Link>
           <LinkedSidebar 
-            sections={['about', 'code_projects', 'music']}
+            sections={['code_projects', 'music']}
             selected={section}
           />
         </div>
