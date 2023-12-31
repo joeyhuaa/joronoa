@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 
 import joey1 from '../public/assets/joey1.jpg'
 import joey2 from '../public/assets/joey2.jpeg'
-//! import joey3 from '../public/assets/joey3.jpg'
-//! import joey4 from '../public/assets/joey4.jpg'
+import joey3 from '../public/assets/joey3.jpg'
+import joey4 from '../public/assets/joey4.jpg'
 import { StaticImageData } from 'next/image'
 
 const pics: StaticImageData[] = [
   joey1,
   joey2,
-  // joey3,
-  // joey4,
+  joey3,
+  joey4,
 ]
 
 export default function Pics() {
