@@ -5,7 +5,8 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
+import AppLoading from './loading'
 
 import LinkedSidebar from '@/components/LinkedSidebar'
 
@@ -35,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <>
+    <Suspense fallback={<AppLoading />}>
       <Head>
         <link href="https://fonts.googleapis.com/css?family=Tilt Prism" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet" />
@@ -59,6 +60,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </div>
-    </>
+    </Suspense>
   )
 }
