@@ -22,7 +22,7 @@ export default function Home() {
       }}>
         <div className='section'>
           <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)}>
-            i am <Name>{nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
+            i am <Name>{!nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
           </Title>
           <Career><a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a></Career>
           <Career>programmer</Career>
