@@ -21,6 +21,7 @@ export default function Home() {
         alignItems: 'center',
       }}>
         <div className='section'>
+          <Pics />
           <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)}>
             i am <Name>{!nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
           </Title>
@@ -29,20 +30,19 @@ export default function Home() {
           <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)}>
             {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
           </Heritage>
-          <Heritage>2nd-gen immigrant</Heritage>
+          {/* <Heritage>2nd-gen immigrant</Heritage> */}
           <Heritage>GEN-Z</Heritage>
           <Heritage>
-            year of the dragon
+            {/* year of the dragon */}
             {/* year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span> */}
           </Heritage>
-          <HumanRole>friend</HumanRole>
+          {/* <HumanRole>friend</HumanRole>
           <HumanRole>son</HumanRole>
-          <HumanRole>brother</HumanRole>
+          <HumanRole>brother</HumanRole> */}
           {/* <Identity>follower of Christ</Identity> */}
           <Hobby>food lover</Hobby>
           <Hobby>hooper</Hobby>
         </div>
-        <Pics />
       </main>
     </>
   )
@@ -53,6 +53,7 @@ const Title = styled.h1`
 `
 const Name = styled.span`
   font-weight: bold;
+  color: whitesmoke;
 `
 const Career = styled.h1`
   color: #66FF8A;

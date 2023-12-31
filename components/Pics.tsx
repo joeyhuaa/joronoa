@@ -32,9 +32,12 @@ export default function Pics() {
         className='fade-in'
         src={pics[picIndex].src} 
         alt='pic' 
-        onClick={changePic} width={350} 
+        onClick={changePic} 
         style={{
           cursor: 'pointer',
+          objectFit: 'cover',
+          width: '200px',
+          height: '200px',
         }}
       />
     </div>
