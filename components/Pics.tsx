@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import joey1 from '../public/assets/joey1.jpeg'
 import joey2 from '../public/assets/joey2.jpeg'
@@ -25,10 +25,13 @@ export default function Pics() {
   return (
     <img 
       id='random-pic' 
+      className='fade-in'
       src={pics[picIndex].src} 
       alt='pic' 
       onClick={changePic} width={300} 
-      style={{cursor: 'pointer'}}
+      style={{
+        cursor: 'pointer',
+      }}
     />
   )
 }

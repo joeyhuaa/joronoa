@@ -4,7 +4,8 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 export default function Home() {
-  const [race, setRace] = useState('chinese')
+  const [raceHovered, setRaceHovered] = useState(false)
+  const [zodiacHovered, setZodiacHovered] = useState(false)
 
   return (
     <>
@@ -18,10 +19,14 @@ export default function Home() {
         <div className='section'>
           <Career><a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a></Career>
           <Career>programmer</Career>
-          <Race />
+          <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)}>
+            {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
+          </Heritage>
           <Heritage>2nd-gen immigrant</Heritage>
           <Heritage>gen-z</Heritage>
-          <Heritage>year of the <Zodiac /></Heritage>
+          <Heritage>
+            year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span>
+          </Heritage>
           <HumanRole>friend</HumanRole>
           <HumanRole>son</HumanRole>
           <HumanRole>brother</HumanRole>
@@ -38,34 +43,25 @@ export default function Home() {
 }
 
 const Career = styled.h1`
-  color: #66FF8A
+  color: #66FF8A;
 `
 const Heritage = styled.h1`
-  color: #FF6242
-`
-const Race = styled(Heritage)`
-  &:before {
-    content: 'chinese'
-  }
-  &:hover:before {
-    content: '中国人'
-  }
-`
-const Zodiac = styled.span`
-  &:before {
-    content: 'dragon'
-  }
-  &:hover:before {
-    content: '龙'
-  }
+  color: #FF6242;
 `
 const HumanRole = styled.h1`
-  color: #52C5FF
+  color: #52C5FF;
 `
 const Identity = styled.h1`
-  color: #4046FF
+  color: #4046FF;
 `
 const Hobby = styled.h1`
-  color: #FFF79C
+  color: #FFF79C;
+`
+
+const HoverText = styled.span`
+  animation: fadeIn 0.3s ease-in-out;
+`
+const UnHoverText = styled.span`
+  animation: fadeIn 0.3s ease-in-out;
 `
 
