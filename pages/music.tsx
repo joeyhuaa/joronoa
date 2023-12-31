@@ -4,8 +4,8 @@ import grace from '@/public/assets/Grace-Art.jpg'
 export default function Music() {
   return (
     <div className="section">
-      <h1 className="text-4xl">Music</h1>
-      <br />
+      {/* <h1 className="text-4xl">music</h1> */}
+      {/* <br />
       {[1,1,1].map(x => (
         <div className="mb-4" key={x}>
           <MusicPostCard 
@@ -15,7 +15,7 @@ export default function Music() {
             link='/music/grace'
           />
         </div>
-      ))}
+      ))} */}
     </div>
   )
 }

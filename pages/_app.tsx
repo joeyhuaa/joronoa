@@ -9,14 +9,16 @@ import { useState, useEffect } from 'react'
 
 import LinkedSidebar from '@/components/LinkedSidebar'
 
-const links = [
+const pages = [
+  'music',
   // 'code_projects', 
-  'music', 
-  'youtube',
-  'instagram',
-  'github',
-  'linkedin',
 ]
+const links = {
+  'youtube': 'https://www.youtube.com/@joronoa_music',
+  'instagram': 'https://www.instagram.com/joronoa.music/',
+  'github': 'https://github.com/joeyhuaa',
+  'linkedin': 'https://www.linkedin.com/in/joeywhua/'
+}
 
 export default function App({ Component, pageProps }: AppProps) {
   const [section, setSection] = useState('')
@@ -48,6 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </h1>
           </Link>
           <LinkedSidebar 
+            pages={pages}
             links={links}
             selected={section}
           />

@@ -1,8 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Pics from '@/components/Pics'
-import Link from 'next/link'
-import Sidebar from '@/components/Sidebar'
 import { useState } from 'react'
 import styled from 'styled-components'
 
@@ -21,10 +18,10 @@ export default function Home() {
         <div className='section'>
           <Career>musical artist</Career>
           <Career>programmer</Career>
-          <Race></Race>
+          <Race />
           <Heritage>2nd-gen immigrant</Heritage>
           <Heritage>gen-z</Heritage>
-          <Heritage>year of the dragon</Heritage>
+          <Heritage>year of the <Zodiac /></Heritage>
           <HumanRole>friend</HumanRole>
           <HumanRole>son</HumanRole>
           <HumanRole>brother</HumanRole>
@@ -33,7 +30,6 @@ export default function Home() {
           <Hobby>hooper</Hobby>
         </div>
         <div className='section'>
-          {/* <ProfilePics /> */}
           <Pics />
         </div>
       </main>
@@ -41,7 +37,7 @@ export default function Home() {
   )
 }
 
-const Career = styled.h1 `
+const Career = styled.h1`
   color: #66FF8A
 `
 const Heritage = styled.h1`
@@ -55,6 +51,14 @@ const Race = styled(Heritage)`
     content: '中国人'
   }
 `
+const Zodiac = styled.span`
+  &:before {
+    content: 'dragon'
+  }
+  &:hover:before {
+    content: '龙'
+  }
+`
 const HumanRole = styled.h1`
   color: #52C5FF
 `
@@ -63,7 +67,5 @@ const Identity = styled.h1`
 `
 const Hobby = styled.h1`
   color: #FFF79C
-`
-const ProfilePics = styled(Image)`
 `
 
