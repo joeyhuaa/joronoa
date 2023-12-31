@@ -1,9 +1,18 @@
 import styled from "styled-components";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function AppLoading() {
   return (
     <div className='flex-center-whole-screen fade-out'>
       <h1>·花·</h1>
+    </div>
+  )
+}
+
+export function PageLoading() {
+  return (
+    <div className='fade-out'>
+      <CircularProgress />
     </div>
   )
 }
