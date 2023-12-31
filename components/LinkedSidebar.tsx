@@ -22,6 +22,9 @@ export default function LinkedSidebar({ pages, links, handleClick, selected }: P
           <Link href={`/${section}`}>{section}</Link>
         </p>
       ))}
+      
+      ·
+
       {Object.keys(links).map(key => (
         <p 
           key={`${key}-link`}
