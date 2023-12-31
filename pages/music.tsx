@@ -1,5 +1,6 @@
 import MusicPostCard from "@/components/MusicPostCard"
 import grace from '@/public/assets/Grace-Art.jpg'
+import { useEffect } from "react"
 
 export default function Music() {
   return (
@@ -16,6 +17,9 @@ export default function Music() {
           />
         </div>
       ))} */}
+      <div id="spotify-iframe">
+        under construction!
+      </div>
     </div>
   )
 }

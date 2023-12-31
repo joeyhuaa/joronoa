@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <main style={{display:'flex'}}>
         <div className='section'>
-          <Career>musical artist</Career>
+          <Career><a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a></Career>
           <Career>programmer</Career>
           <Race />
           <Heritage>2nd-gen immigrant</Heritage>
