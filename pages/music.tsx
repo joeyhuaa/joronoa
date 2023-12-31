@@ -7,7 +7,7 @@ export default function Music() {
       <h1 className="text-4xl">Music</h1>
       <br />
       {[1,1,1].map(x => (
-        <div className="mb-4">
+        <div className="mb-4" key={x}>
           <MusicPostCard 
             title='GRACE (feat. Halim)'
             subtitle='asdfasdf'
