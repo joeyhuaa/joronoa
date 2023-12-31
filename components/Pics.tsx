@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import joey1 from '../public/assets/joey1.jpg'
+import joey1 from '../public/assets/joey1.jpeg'
 import joey2 from '../public/assets/joey2.jpeg'
-import joey3 from '../public/assets/joey3.jpg'
-import joey4 from '../public/assets/joey4.jpg'
+import joey3 from '../public/assets/joey3.jpeg'
+import joey4 from '../public/assets/joey4.jpeg'
 import { StaticImageData } from 'next/image'
 
 const pics: StaticImageData[] = [
@@ -23,6 +23,12 @@ export default function Pics() {
   }
 
   return (
-    <img id='random-pic' src={pics[picIndex].src} alt='pic' onClick={changePic} width={300} />
+    <img 
+      id='random-pic' 
+      src={pics[picIndex].src} 
+      alt='pic' 
+      onClick={changePic} width={300} 
+      style={{cursor: 'pointer'}}
+    />
   )
 }
