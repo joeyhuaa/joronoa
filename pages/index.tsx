@@ -4,6 +4,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 export default function Home() {
+  const [nameHovered, setNameHovered] = useState(false)
   const [raceHovered, setRaceHovered] = useState(false)
   const [zodiacHovered, setZodiacHovered] = useState(false)
 
@@ -15,17 +16,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/public/hua.png" sizes="any" />
       </Head>
-      <main style={{display:'flex'}}>
+      <main style={{
+        display:'flex',
+        alignItems: 'center',
+      }}>
         <div className='section'>
+          <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)}>
+            i am <Name>{nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
+          </Title>
           <Career><a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a></Career>
           <Career>programmer</Career>
           <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)}>
             {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
           </Heritage>
           <Heritage>2nd-gen immigrant</Heritage>
-          <Heritage>gen-z</Heritage>
+          <Heritage>GEN-Z</Heritage>
           <Heritage>
-            year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span>
+            year of the dragon
+            {/* year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span> */}
           </Heritage>
           <HumanRole>friend</HumanRole>
           <HumanRole>son</HumanRole>
@@ -34,14 +42,18 @@ export default function Home() {
           <Hobby>food lover</Hobby>
           <Hobby>hooper</Hobby>
         </div>
-        <div className='section'>
-          <Pics />
-        </div>
+        <Pics />
       </main>
     </>
   )
 }
 
+const Title = styled.h1`
+  font-size: 50px;
+`
+const Name = styled.span`
+  font-weight: bold;
+`
 const Career = styled.h1`
   color: #66FF8A;
 `

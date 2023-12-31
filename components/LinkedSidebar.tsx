@@ -1,4 +1,5 @@
 import Link from "next/link"
+import styled from "styled-components"
 
 interface Props {
   pages: string[],
@@ -11,7 +12,7 @@ interface Props {
 
 export default function LinkedSidebar({ pages, links, handleClick, selected }: Props) {
   return (
-    <div className="linked-sidebar">
+    <_LinkedSidebar>
       {pages.map(section => (
         <p 
           key={`${section}-link`}
@@ -29,6 +30,16 @@ export default function LinkedSidebar({ pages, links, handleClick, selected }: P
           <a href={links[key]} target="_blank">{key}</a>
         </p>
       ))}
-    </div>
+    </_LinkedSidebar>
   )
 }
+
+const _LinkedSidebar = styled.div`
+  height: 50vh;
+  // width: 300px;
+  /* border: solid 1px white; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`

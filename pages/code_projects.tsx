@@ -1,7 +1,7 @@
 export default function CodeProjects() {
   return (
     <div className="section">
-      Projects babyyyyy
+      under construction!
     </div>
   )
 }

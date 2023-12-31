@@ -23,15 +23,20 @@ export default function Pics() {
   }
 
   return (
-    <img 
-      id='random-pic' 
-      className='fade-in'
-      src={pics[picIndex].src} 
-      alt='pic' 
-      onClick={changePic} width={300} 
-      style={{
-        cursor: 'pointer',
-      }}
-    />
+    <div id='profile-pics' style={{
+      marginLeft:'auto',
+      marginRight:'50px',
+    }}>
+      <img 
+        id='random-pic' 
+        className='fade-in'
+        src={pics[picIndex].src} 
+        alt='pic' 
+        onClick={changePic} width={350} 
+        style={{
+          cursor: 'pointer',
+        }}
+      />
+    </div>
   )
 }

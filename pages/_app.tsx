@@ -1,19 +1,19 @@
 import '@/styles/globals.css'
-import '@/styles/main-menu.css'
 
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import AppLoading from './loading'
-
+import frower from '../public/assets/frower.svg'
 import LinkedSidebar from '@/components/LinkedSidebar'
 
 const pages = [
   'music',
-  // 'code_projects', 
+  'code_projects', 
 ]
 const links = {
   'youtube': 'https://www.youtube.com/@joronoa_music',
@@ -22,10 +22,15 @@ const links = {
   'linkedin': 'https://www.linkedin.com/in/joeywhua/'
 }
 
+const Frower = () => (
+  <Link href='/'>
+    <Image src={frower} alt='' width='150' />
+  </Link>
+)
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [section, setSection] = useState('')
-  const [nameHovered, setNameHovered] = useState(false)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -56,18 +61,14 @@ export default function App({ Component, pageProps }: AppProps) {
             <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
           </Head>
           <div style={{display: 'flex'}}>
-            <div id='main-menu'>
-              <Link href='/' onClick={() => handleClick('')}>
-                <h1 className='text-6xl/loose pl-5' onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)}>
-                  {nameHovered ? <HoverText>joey 花</HoverText> : <UnHoverText>joronoa</UnHoverText>}
-                </h1>
-              </Link>
+            <MainMenu>
+              <Frower />
               <LinkedSidebar 
                 pages={pages}
                 links={links}
                 selected={section}
               />
-            </div>
+            </MainMenu>
             <div style={{flex: '75%'}}>
               <Component {...pageProps} />
             </div>
@@ -79,12 +80,15 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 const AppContainer = styled.div`
-  padding: 30px;
+  padding: 20px;
 `
-const HoverText = styled.span`
-  animation: fadeIn 0.6s ease-in-out;
-`
-const UnHoverText = styled.span`
-  animation: fadeIn 0.6s ease-in-out;
+const MainMenu = styled.div`
+  height: 90vh;
+  border-right: solid 1px rgb(84, 84, 106);
+  flex: 15%;
+  padding-right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
