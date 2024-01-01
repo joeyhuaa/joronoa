@@ -61,7 +61,7 @@ const Name = styled.span`
 `
 
 const MeNoun = styled.p<{ isMobile: boolean }>`
-  font-size: ${props => props.isMobile ? '20px' : '30px'};
+  font-size: ${props => props.isMobile ? '20px' : '25px'};
 `
 const Career = styled(MeNoun)`
   color: #66FF8A;

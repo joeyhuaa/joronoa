@@ -104,6 +104,10 @@ const MainMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  position: -webkit-sticky;   
+  position: sticky;
+  top: 0;
 `
 const CollapsedMainMenu = styled.div`
   width: 0;
