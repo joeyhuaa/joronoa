@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react'
 import AppLoading from './loading'
 import frower from '../public/assets/frower.svg'
 import LinkedSidebar from '@/components/LinkedSidebar'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const pages = [
   'music',
@@ -32,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [section, setSection] = useState('')
   const [loading, setLoading] = useState(true);
+  const isMobile = useMediaQuery('(max-width:450px)')
 
   useEffect(() => {
     // Simulate a delay for demonstration purposes
@@ -61,14 +63,25 @@ export default function App({ Component, pageProps }: AppProps) {
             <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
           </Head>
           <div style={{display: 'flex'}}>
-            <MainMenu>
-              <Frower />
-              <LinkedSidebar 
-                pages={pages}
-                links={links}
-                selected={section}
-              />
-            </MainMenu>
+            {isMobile ? (
+              <>
+                <CollapsedMainMenu>
+
+                </CollapsedMainMenu>
+              </>
+            ) : (
+              <>
+                <MainMenu>
+                  <Frower />
+                  <LinkedSidebar 
+                    pages={pages}
+                    links={links}
+                    selected={section}
+                  />
+                </MainMenu>
+              </>
+            )}
+
             <div style={{flex: '75%'}}>
               <Component {...pageProps} />
             </div>
@@ -87,8 +100,13 @@ const MainMenu = styled.div`
   border-right: solid 1px rgb(84, 84, 106);
   flex: 15%;
   padding-right: 50px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
+const CollapsedMainMenu = styled.div`
+  width: 0;
+`
+
 

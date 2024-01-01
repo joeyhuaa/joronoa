@@ -1,6 +1,8 @@
 import Link from "next/link"
 import styled from "styled-components"
 
+// mobile view needs to be collapsed hamburger button
+
 interface Props {
   pages: string[],
   links: {
@@ -11,6 +13,7 @@ interface Props {
 }
 
 export default function LinkedSidebar({ pages, links, handleClick, selected }: Props) {
+
   return (
     <_LinkedSidebar>
       {pages.map(section => (
@@ -45,4 +48,7 @@ const _LinkedSidebar = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+const CollapsedSidebar = styled(_LinkedSidebar)`
+  // width: 0px;
 `

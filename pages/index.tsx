@@ -2,11 +2,13 @@ import Head from 'next/head'
 import Pics from '@/components/Pics'
 import { useState } from 'react'
 import styled from 'styled-components'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Home() {
   const [nameHovered, setNameHovered] = useState(false)
   const [raceHovered, setRaceHovered] = useState(false)
   const [zodiacHovered, setZodiacHovered] = useState(false)
+  const isMobile = useMediaQuery('(max-width:450px)')
 
   return (
     <>
@@ -22,52 +24,58 @@ export default function Home() {
       }}>
         <div className='section'>
           <Pics />
-          <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)}>
+          <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)} isMobile={isMobile}>
             i am <Name>{!nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
           </Title>
-          <Career><a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a></Career>
-          <Career>programmer</Career>
-          <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)}>
+          <Career isMobile={isMobile}>
+            <a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a>
+          </Career>
+          <Career isMobile={isMobile}>programmer</Career>
+          <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)} isMobile={isMobile}>
             {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
           </Heritage>
           {/* <Heritage>2nd-gen immigrant</Heritage> */}
-          <Heritage>GEN-Z</Heritage>
-          <Heritage>
+          <Heritage isMobile={isMobile}>GEN-Z</Heritage>
+          {/* <Heritage> */}
             {/* year of the dragon */}
             {/* year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span> */}
-          </Heritage>
+          {/* </Heritage> */}
           {/* <HumanRole>friend</HumanRole>
           <HumanRole>son</HumanRole>
           <HumanRole>brother</HumanRole> */}
           {/* <Identity>follower of Christ</Identity> */}
-          <Hobby>food lover</Hobby>
-          <Hobby>hooper</Hobby>
+          <Hobby isMobile={isMobile}>food lover</Hobby>
+          <Hobby isMobile={isMobile}>hooper</Hobby>
         </div>
       </main>
     </>
   )
 }
 
-const Title = styled.h1`
-  font-size: 50px;
+const Title = styled.h1<{ isMobile: boolean }>`
+  font-size: ${props => props.isMobile ? '40px' : '50px'};
 `
 const Name = styled.span`
   font-weight: bold;
   color: whitesmoke;
 `
-const Career = styled.h1`
+
+const MeNoun = styled.p<{ isMobile: boolean }>`
+  font-size: ${props => props.isMobile ? '20px' : '30px'};
+`
+const Career = styled(MeNoun)`
   color: #66FF8A;
 `
-const Heritage = styled.h1`
+const Heritage = styled(MeNoun)`
   color: #FF6242;
 `
-const HumanRole = styled.h1`
+const HumanRole = styled(MeNoun)`
   color: #52C5FF;
 `
-const Identity = styled.h1`
+const Identity = styled(MeNoun)`
   color: #4046FF;
 `
-const Hobby = styled.h1`
+const Hobby = styled(MeNoun)`
   color: #FFF79C;
 `
 
