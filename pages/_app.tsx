@@ -23,10 +23,12 @@ const links = {
   'linkedin': 'https://www.linkedin.com/in/joeywhua/'
 }
 
-const Frower = () => (
-  <Link href='/'>
-    <Image src={frower} alt='' width='150' />
-  </Link>
+const _Frower = ({ width, position }) => (
+  <div style={{ position: position }}>
+    <Link href='/'>
+      <Image src={frower} alt='' width={width} />
+    </Link>
+  </div>
 )
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -65,14 +67,17 @@ export default function App({ Component, pageProps }: AppProps) {
           <div style={{display: 'flex'}}>
             {isMobile ? (
               <>
-                <CollapsedMainMenu>
-
-                </CollapsedMainMenu>
+                <Frower width={30} position='absolute' />
+                <LinkedSidebar 
+                  pages={pages}
+                  links={links}
+                  selected={section}
+                />
               </>
             ) : (
               <>
                 <MainMenu>
-                  <Frower />
+                  <Frower width={150} position='relative' />
                   <LinkedSidebar 
                     pages={pages}
                     links={links}
@@ -109,8 +114,7 @@ const MainMenu = styled.div`
   position: sticky;
   top: 0;
 `
-const CollapsedMainMenu = styled.div`
-  width: 0;
+const Frower = styled(_Frower)`
+  position: absolute;
 `
-
 
