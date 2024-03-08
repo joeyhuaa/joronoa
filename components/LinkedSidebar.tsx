@@ -2,7 +2,9 @@ import Link from "next/link"
 import styled from "styled-components"
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Menu } from '@mui/icons-material'
+import { Menu, Close } from '@mui/icons-material'
+
+import { useState } from "react";
 
 // mobile view needs to be collapsed hamburger button
 
@@ -17,12 +19,39 @@ interface Props {
 
 export default function LinkedSidebar({ pages, links, handleClick, selected }: Props) {
   const isMobile = useMediaQuery('(max-width:450px)')
-  console.log('isMobile', isMobile)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   if (isMobile) {
     return (
-      <div style={{position:'absolute', right:25}}>
-        <Menu />
+      <div 
+        style={{position:'absolute', right:20}}
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        {isMobileMenuOpen ? <Close /> : <Menu />}
+        {isMobileMenuOpen && (
+          <MenuContents>
+            {pages.map(section => (
+              <p 
+                key={`${section}-link`}
+                onClick={() => handleClick && handleClick(section)}
+                style={{ color:'whitesmoke' }}
+              >
+                <Link href={`/${section}`}>{section}</Link>
+              </p>
+            ))}
+            
+            ·
+
+            {Object.keys(links).map(key => (
+              <p 
+                key={`${key}-link`}
+                style={{ color: 'whitesmoke' }}
+              >
+                <a href={links[key]} target="_blank">{key}</a>
+              </p>
+            ))}
+          </MenuContents>
+        )}
       </div>
     )
   } else {
@@ -62,6 +91,11 @@ const _LinkedSidebar = styled.div`
   justify-content: center;
   align-items: center;
 `
-const CollapsedSidebar = styled(_LinkedSidebar)`
-  // width: 0px;
+const MenuContents = styled.div`
+  border: solid 0.5px white;
+  width: 80vw;
+  position: absolute;
+  right: 0;
+  background: #1c2229;
+  padding: 20px;
 `

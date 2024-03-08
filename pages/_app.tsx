@@ -13,6 +13,7 @@ import LinkedSidebar from '@/components/LinkedSidebar'
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const pages = [
+  'home',
   'music',
   'code_projects', 
 ]
@@ -25,7 +26,7 @@ const links = {
 
 const _Frower = ({ width, position }) => (
   <div style={{ position: position }}>
-    <Link href='/'>
+    <Link href='/home'>
       <Image src={frower} alt='' width={width} />
     </Link>
   </div>
