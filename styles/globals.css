@@ -1,8 +1,11 @@
-@tailwind base;
+/* if i comment out this line alot of base styles go away! */
+@tailwind base; 
+
 @tailwind components;
 @tailwind utilities;
 
 html {
+  background-color: red;
 }
 .section {
   padding: 50px;
@@ -128,7 +131,7 @@ a {
 
 @media (prefers-color-scheme: dark) {
   html {
-    color-scheme: dark;
+    color-scheme: dark; /*? what if browser isn't using dark theme? */
   }
 }
 
