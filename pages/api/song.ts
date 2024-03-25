@@ -1,7 +1,13 @@
-const getAccessToken = async () => {
+import type { NextApiRequest, NextApiResponse } from 'next'
+
+type Data = {
+  artist: string
+}
+
+const getAccessToken = async () => { 
   const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
-  const response = await fetch("https://accounts.spotify.com/api/token", {
+  const response = await fetch("https://accounts.spotify.com/api/token", { //! socket disconnect error
     method: "POST",
     headers: {
       Authorization: `Basic ${Buffer.from(
@@ -18,13 +24,17 @@ const getAccessToken = async () => {
   return response.json();
 };
 
-export const topTracks = async () => {
+export default async function handler(
+  // songId='4ezeJXc8ToDbkZ3FATHsD4',
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
   const { access_token } = await getAccessToken();
-
-  // return fetch("https://api.spotify.com/v1/me/top/tracks", {
-  return fetch("https://api.spotify.com/v1/artists/56ZTgzPBDge0OvCGgMO3OY/top-tracks", {
+  const result = await fetch(`https://api.spotify.com/v1/${songId}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
+  console.log(result)
+  res.status(200).json({ artist: 'joronoa' });
 };

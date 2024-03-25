@@ -30,7 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/spotify.js"
+    "pages/api/spotify.ts"
   ],
   "exclude": [
     "node_modules"
