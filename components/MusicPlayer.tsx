@@ -1,45 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import shallow from 'zustand/shallow'
 import styled from 'styled-components'
-// import { useStore } from '../data/store'
 
 import moment from 'moment'
 import { PlayArrow, Pause } from '@mui/icons-material'
 
 // todo - figure out how to prevent re-rendering
 function MusicPlayer() {
+  const [currSong, setCurrSong] = useState(null)
   const [currentTime, setCurrentTime] = useState(null) //! this is prob why this component is re-rendering despite React.memo
-  // const { currSong, setCurrSong, isSongPlaying, setSongPlaying, playPause, currProject } = useStore(state => ({
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  useEffect(() => {
+    async function getSong() {
+      console.log('getSong')
+      try {
+        const res = await fetch('/api/song')
+        const data  = await res.json()
+        setCurrSong(data)
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    }
+    getSong()
+  }, [])
+
+  
+  // const { currSong, setCurrSong, isPlaying, setSongPlaying, playPause, currProject } = useStore(state => ({
   //   currSong: state.currSong,
   //   setCurrSong: state.setCurrSong,
-  //   isSongPlaying: state.isSongPlaying,
+  //   isPlaying: state.isPlaying,
   //   setSongPlaying: state.setSongPlaying,
   //   playPause: state.playPause,
   //   currProject: state.currProject,
   // }), shallow);
   // const songs = currProject?.songs;
 
-  //! DUMMY VALUES
-  let isSongPlaying = false;
-  //!
-
   useEffect(() => {
-    console.log('MUSIC PLAYER RENDER')
-  }, [])
-
-  // useEffect(() => {
-  //   if (isSongPlaying) {
-  //     music.current.play()  
-  //   } else {
-  //     music.current.pause()
-  //   }
-  // }, [isSongPlaying])
+    if (isPlaying) {
+      music.current.play()  
+    } else {
+      music.current.pause()
+    }
+  }, [isPlaying])
 
   let music = useRef(null)
   let playhead = useRef(null)
   let timeline = useRef(null)
   let timelinePast = useRef(null)
   let pButton = useRef(null)
+
+  let playPause = () => setIsPlaying(!isPlaying)
 
   let getCurrentTime = () => { if (music.current) return music.current.currentTime }
 
@@ -89,15 +99,15 @@ function MusicPlayer() {
         id='music'
         ref={music}
         onTimeUpdate={timeUpdate}
-        // src={currSong ? currSong.url : null}
+        src={currSong ? currSong.url : null}
       />
 
       <SongTitle>
-        {/* {currSong ? currSong.name : null} */}
+        {currSong ? currSong.name : null}
       </SongTitle>
 
-      <PButton ref={pButton} onClick={() => playPause(currSong.id)}>
-        {isSongPlaying ? (
+      <PButton ref={pButton} onClick={() => playPause()}>
+        {isPlaying ? (
           <Pause />
         ) : (
           <PlayArrow />

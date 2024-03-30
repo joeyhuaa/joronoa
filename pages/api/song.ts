@@ -1,40 +1,43 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 type Data = {
-  artist: string
+  name: string,
+  duration: string,
+  filetype: string,
+  url: string,
 }
 
-const getAccessToken = async () => { 
-  const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
-
-  const response = await fetch("https://accounts.spotify.com/api/token", { //! socket disconnect error
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-      ).toString("base64")}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token,
-    }),
-  });
-
-  return response.json();
-};
+// initialize s3 client
+const s3Client = new S3Client({ 
+  region: 'us-west-1',
+  credentials: {
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY
+  }
+});
 
 export default async function handler(
   // songId='4ezeJXc8ToDbkZ3FATHsD4',
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { access_token } = await getAccessToken();
-  const result = await fetch(`https://api.spotify.com/v1/${songId}`, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-  console.log(result)
-  res.status(200).json({ artist: 'joronoa' });
-};
+  console.log('/api/song handler func')
+
+  //
+  const input = {
+    Bucket: 'supertonic',
+    Key: '03yxafzpxbcfz7b555fe69d36t3d' //send in as prop
+  }
+  const command = new GetObjectCommand(input)
+  const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+  const data = {
+    name: 'Rhodey',
+    duration: '9000',
+    filetype: 'mp3',
+    url: url
+  }
+
+  res.status(200).json(data)
+}
