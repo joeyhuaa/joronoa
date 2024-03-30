@@ -15,8 +15,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const pages = [
   'home',
-  'music',
   'code_projects', 
+  'music',
 ]
 const links = {
   'youtube': 'https://www.youtube.com/@joronoa_music',

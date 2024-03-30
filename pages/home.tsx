@@ -7,7 +7,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 export default function Home() {
   const [nameHovered, setNameHovered] = useState(false)
   const [raceHovered, setRaceHovered] = useState(false)
-  const [zodiacHovered, setZodiacHovered] = useState(false)
+  // const [zodiacHovered, setZodiacHovered] = useState(false)
   const isMobile = useMediaQuery('(max-width:450px)')
 
   return (
@@ -27,10 +27,10 @@ export default function Home() {
           <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)} isMobile={isMobile}>
             i am <Name>{!nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
           </Title>
+          <Career isMobile={isMobile}>programmer</Career>
           <Career isMobile={isMobile}>
             <a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a>
           </Career>
-          <Career isMobile={isMobile}>programmer</Career>
           <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)} isMobile={isMobile}>
             {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
           </Heritage>
