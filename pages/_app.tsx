@@ -1,3 +1,4 @@
+// import '@tailwind base'
 import '@/styles/globals.css'
 
 import type { AppProps } from 'next/app'
@@ -16,8 +17,8 @@ import MusicPlayer from '@/components/MusicPlayer'
 
 const pages = [
   'home',
-  'music',
   'code_projects', 
+  'music',
 ]
 const links = {
   'youtube': 'https://www.youtube.com/@joronoa_music',
