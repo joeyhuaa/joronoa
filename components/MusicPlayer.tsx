@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
-
 import moment from 'moment'
 import { PlayArrow, Pause } from '@mui/icons-material'
 
-// todo - figure out how to prevent re-rendering
 function MusicPlayer() {
+  const music = useRef(null)
+  const timeline = useRef(null)
+  const timelinePast = useRef(null)
+  const pButton = useRef(null)
+
   const [currSong, setCurrSong] = useState(null)
   const [currentTime, setCurrentTime] = useState(null) //! this is prob why this component is re-rendering despite React.memo
   const [isPlaying, setIsPlaying] = useState(false)
+  const [songDuration, setSongDuration] = useState(null)
 
   useEffect(() => {
     async function getSong() {
-      console.log('getSong')
       try {
         const res = await fetch('/api/song')
-        const data  = await res.json()
+        const data  = await res?.json()
+        console.log(data)
         setCurrSong(data)
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -24,16 +28,12 @@ function MusicPlayer() {
     getSong()
   }, [])
 
-  
-  // const { currSong, setCurrSong, isPlaying, setSongPlaying, playPause, currProject } = useStore(state => ({
-  //   currSong: state.currSong,
-  //   setCurrSong: state.setCurrSong,
-  //   isPlaying: state.isPlaying,
-  //   setSongPlaying: state.setSongPlaying,
-  //   playPause: state.playPause,
-  //   currProject: state.currProject,
-  // }), shallow);
-  // const songs = currProject?.songs;
+  // can we get song duration in state before pressing play?
+  useEffect(() => {
+    if (music?.current?.src) {
+      setSongDuration(music.current.duration)
+    }
+  }), [music]
 
   useEffect(() => {
     if (isPlaying) {
@@ -43,20 +43,15 @@ function MusicPlayer() {
     }
   }, [isPlaying])
 
-  let music = useRef(null)
-  let playhead = useRef(null)
-  let timeline = useRef(null)
-  let timelinePast = useRef(null)
-  let pButton = useRef(null)
-
   let playPause = () => setIsPlaying(!isPlaying)
 
-  let getCurrentTime = () => { if (music.current) return music.current.currentTime }
+  let getCurrentTime = () => { return music?.current?.currentTime }
 
-  let getDuration = () => { if (music.current) return music.current.duration }
+  let getDuration = () => { return music?.current?.duration }
 
-  let getTimeLineWidth = () => timeline.current.offsetWidth
+  let getTimeLineWidth = () => timeline?.current?.offsetWidth
 
+  //todo
   // let queueNextSong = () => {
   //     let nextSong = songs[Math.floor(Math.random() * songs.length)]
   //     if (nextSong.id === currSong.id) queueNextSong()
@@ -67,15 +62,14 @@ function MusicPlayer() {
   let timeUpdate = () => {
     // update the timeline UI
     let playPercent = (music.current.currentTime / getDuration()) * getTimeLineWidth()
-    playhead.current.style.marginLeft = playPercent + 'px'
-    timelinePast.current.style.width = playPercent + 5 + 'px'
+    timelinePast.current.style.width = playPercent + 'px'
 
     // set state
-    // setCurrentTime( msString(getCurrentTime()) )
-    // if ( getCurrentTime() === getDuration() ) {
-    //   setSongPlaying(false)
-    //   queueNextSong()
-    // }
+    setCurrentTime( msString(getCurrentTime()) )
+    if ( getCurrentTime() === getDuration() ) {
+      setIsPlaying(false)
+      // queueNextSong() //todo
+    }
   }
 
   let timeLineClicked = (e) => {
@@ -115,16 +109,15 @@ function MusicPlayer() {
       </PButton>
 
       <Timestamp>
-        {music.current ? currentTime : `-:--`} {/* change to if currentSong, not if music.current */}
+        {currentTime || `-:--`}
       </Timestamp>
 
       <Timeline ref={timeline} onClick={e => timeLineClicked(e)}>
-        <div id='timeline_past' ref={timelinePast} />
-        <Playhead ref={playhead} />
+        <TimelinePast ref={timelinePast} />
       </Timeline>
 
       <Timestamp>
-        {music.current ? msString(getDuration()) : `-:--`}
+        {msString(getDuration()) || `-:--`}
       </Timestamp>
     </Container>
   )
@@ -144,6 +137,11 @@ const Container = styled.section`
   position: fixed;
   bottom: 20px;
 `
+const SongTitle = styled.span`
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 1em;
+`
 const PButton = styled.div`
   width: 20px;
   height: 20px;
@@ -159,14 +157,10 @@ const Timestamp = styled.span`
   width: 30px;
   text-align: center;
 `
-const SongTitle = styled.span`
-  font-size: 12px;
-  font-weight: bold;
-  margin-left: 1em;
-`
 const Timeline = styled.div`
   width: 400px;
   height: 5px;
+  margin: 0 5px;
   background: #353535;
   border-radius: 15px;
   display: flex;
@@ -174,12 +168,10 @@ const Timeline = styled.div`
   position: relative;
   &:hover { cursor: pointer; }
 `
-const Playhead = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-top: 1px;
-  background-color: white;
+const TimelinePast = styled.div`
+  height: 5px;
+  background: white;
+  border-radius: 15px;
 `
 
 export default MusicPlayer;

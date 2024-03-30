@@ -4,7 +4,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 type Data = {
   name: string,
-  duration: string,
+  // duration: string,
   filetype: string,
   url: string,
 }
@@ -34,7 +34,7 @@ export default async function handler(
   const url = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
   const data = {
     name: 'Rhodey',
-    duration: '9000',
+    // duration: '9000',
     filetype: 'mp3',
     url: url
   }
