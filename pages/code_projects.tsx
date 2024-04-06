@@ -45,6 +45,30 @@ export default function CodeProjects() {
           </>
         }
       />
+      {/* <Project 
+        imgSrc='/assets/newsletter-demo.png'
+        description={
+          <>
+            <p>
+              <Link href='https://newsletter-signup-coral.vercel.app/' target="_blank"><b>Newsletter Signup Demo</b></Link>
+            </p>
+          </>
+        }
+      /> */}
+      <Project 
+        imgSrc='/assets/ssb-v2.png'
+        description={
+          <>
+            <p>
+              I built a new <Link href='https://ssb-v2.vercel.app/' target="_blank"><b>website for Super Splash Bros Basketball</b></Link>, 
+              a youth basketball program that I used to work for as a coach. I built the new site using React and React Router, and hosted
+              using Vercel. The goal was to design a site that combined a Mario-themed aesthetic with basketball vibes in order to create a new 
+              and eye-catching brand for SSB Basketball. I communicated frequently with the founder to discuss ideas and make sure I was meeting his 
+              business needs. This was a really fun project to work on and was my first time creating a website for a client.
+            </p>
+          </>
+        }
+      />
     </div>
   )
 }
