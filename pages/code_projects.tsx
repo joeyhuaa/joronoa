@@ -40,8 +40,7 @@ export default function CodeProjects() {
             <p>
               Currenty, Flopper runs 5000 Monte Carlos to calculate player equities, and it takes about a second to run.
               Doing more simulations would make the results more accurate, but calculation time increases pretty significantly,
-              so I've decided to keep the simulations at 5000 in the interest of balancing performance and precision. If I were to improve this app,
-              I'd make the algorithms more efficient and add the option to add more players, but I've decided to focus on other more important projects.
+              so I've decided to keep the simulations at 5000 in the interest of balancing performance and precision.
             </p>
           </>
         }
