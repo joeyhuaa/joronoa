@@ -108,7 +108,7 @@ function MusicPlayer() {
   const webStyles = {
     container: { justifyContent:'center' },
     pButton: { width: '20px', height: '20px', marginLeft: '20px', marginRight: '20px' },
-    timeline: { width: '400px', height: '5px', margin: '0 5px', position: 'relative' }
+    timeline: { width: '400px', height: '5px' }
   }
   const mobileStyles = {
     container: { justifyContent:'space-between' },
