@@ -24,7 +24,7 @@ const Project: React.FC<Project> = ({
     }}>
       <Title><b>{title}</b></Title>
       <Technologies>
-        {technologies?.map(tech => <Technology>{tech}</Technology>)}
+        {technologies?.map(tech => <Technology key={`${title}-${tech}`}>{tech}</Technology>)}
       </Technologies>
       <Description>{description}</Description>
     </div>
