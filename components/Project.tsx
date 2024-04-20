@@ -4,7 +4,7 @@ import { COLORS } from '@/constants'
 
 interface Project {
   title: string,
-  description: HTMLParagraphElement,
+  description: any, //todo - change this lol
   technologies: string[],
   links?: string[]
 }
