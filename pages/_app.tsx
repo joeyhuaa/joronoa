@@ -8,10 +8,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 import AppLoading from './loading'
 import frower from '../public/assets/frower.svg'
 import LinkedSidebar from '@/components/LinkedSidebar'
-import useMediaQuery from '@mui/material/useMediaQuery';
+import MusicPlayer from '@/components/MusicPlayer'
 
 const pages = [
   'home',
@@ -93,6 +95,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </div>
           </div>
+          <MusicPlayer />
         </AppContainer>
       )}
     </>
@@ -100,7 +103,7 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 
 const AppContainer = styled.div`
-  padding: 20px;
+  padding: 20px; 
 `
 const MainMenu = styled.div`
   height: 90vh;
