@@ -13,6 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import AppLoading from './loading'
 import MusicPlayer from '@/components/MusicPlayer'
 import HoverText from '@/components/Hovertext'
+import { COLORS } from '@/constants';
 
 // const pages = [
 //   'home',
@@ -52,7 +53,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </Head>
           <Content>
             <Header>
-              {/* <span>header</span> */}
               {!isHome && (
                 <BackHome style={{ marginLeft: isMobile ? '10px' : '50px'}} onClick={() => router.push('/home')}>
                   <ArrowBackIcon style={{marginRight:'2px'}} fontSize='small' />
@@ -87,7 +87,7 @@ const Header = styled.div`
   display: flex;
   position: fixed;
   top: 0;
-  background-color: #1D232A;
+  background-color: ${COLORS.spaceGray};
   width: 100%;
   height: 50px;
   // box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5); /* Apply a blurred border */
