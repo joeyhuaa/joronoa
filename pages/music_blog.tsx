@@ -3,7 +3,7 @@ import grace from '@/public/assets/Grace-Art.jpg'
 import { useState, useEffect } from "react"
 import { PageLoading } from "./loading"
 
-export default function Music() {
+export default function MusicBlog() {
   const [loading, setLoading] = useState(true)
 
   // to avoid spotify embed loading flash

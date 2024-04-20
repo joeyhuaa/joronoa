@@ -1,14 +1,12 @@
 import Head from 'next/head'
-import Pics from '@/components/Pics'
-import { useState } from 'react'
+import Link from 'next/link';
 import styled from 'styled-components'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { COLORS } from '@/constants';
+import Frower from '@/components/Frower';
+import HoverText from '@/components/Hovertext';
 
 export default function Home() {
-  const [nameHovered, setNameHovered] = useState(false)
-  const [raceHovered, setRaceHovered] = useState(false)
-  // const [zodiacHovered, setZodiacHovered] = useState(false)
   const isMobile = useMediaQuery('(max-width:450px)')
 
   return (
@@ -21,40 +19,60 @@ export default function Home() {
       </Head>
       <main style={{
         display:'flex',
+        flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center'
       }}>
-        <div className='section'>
-          <Pics />
-          <Title onMouseEnter={() => setNameHovered(true)} onMouseLeave={() => setNameHovered(false)} isMobile={isMobile}>
-            i am <Name>{!nameHovered ? <HoverText>joey hua</HoverText> : <UnHoverText>joronoa</UnHoverText>}</Name>
-          </Title>
-          <Career isMobile={isMobile}>programmer</Career>
+        <HomeContent className='section'>
+          <Header>
+            <Frower width={150} position='relative' />
+            <Title isMobile={isMobile}>
+              i am 
+              <Name>
+                <HoverText hoverText=' joronoa' unhoverText=' joey hua' />
+              </Name>
+            </Title>
+          </Header>
           <Career isMobile={isMobile}>
-            <a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>musical artist</a>
+            <Link href='/code_projects'>
+              <HoverText hoverText='/code_projects' unhoverText='programmer' />
+            </Link>
           </Career>
-          <Heritage onMouseEnter={() => setRaceHovered(true)} onMouseLeave={() => setRaceHovered(false)} isMobile={isMobile}>
-            {raceHovered ? <HoverText>中国人</HoverText> : <UnHoverText>chinese</UnHoverText>}
+          <Passion isMobile={isMobile}>
+            <Link href='/music_blog'>
+              <HoverText hoverText='/music_blog' unhoverText='musical artist' />
+            </Link>
+          </Passion>
+          <Heritage isMobile={isMobile}>
+            <HoverText hoverText='中国人' unhoverText='chinese' />
           </Heritage>
-          {/* <Heritage>2nd-gen immigrant</Heritage> */}
-          <Heritage isMobile={isMobile}>GEN-Z</Heritage>
-          {/* <Heritage> */}
-            {/* year of the dragon */}
-            {/* year of the <span onMouseEnter={() => setZodiacHovered(true)} onMouseLeave={() => setZodiacHovered(false)}>{zodiacHovered ? <HoverText>龙</HoverText> : <UnHoverText>dragon</UnHoverText>}</span> */}
-          {/* </Heritage> */}
-          {/* <HumanRole>friend</HumanRole>
-          <HumanRole>son</HumanRole>
-          <HumanRole>brother</HumanRole> */}
+          {/* <Heritage isMobile={isMobile}>GEN-Z</Heritage> */}
           {/* <Identity>follower of Christ</Identity> */}
-          <Hobby isMobile={isMobile}>food lover</Hobby>
-          <Hobby isMobile={isMobile}>hooper</Hobby>
-        </div>
+          {/* <Hobby isMobile={isMobile}>food lover</Hobby>
+          <Hobby isMobile={isMobile}>hooper</Hobby> */}
+        </HomeContent>
       </main>
     </>
   )
 }
 
+const HomeContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+`
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+`
 const Title = styled.h1<{ isMobile: boolean }>`
   font-size: ${props => props.isMobile ? '40px' : '50px'};
+  margin-top: 15px;
 `
 const Name = styled.span`
   font-weight: bold;
@@ -63,9 +81,13 @@ const Name = styled.span`
 
 const MeNoun = styled.p<{ isMobile: boolean }>`
   font-size: ${props => props.isMobile ? '20px' : '25px'};
+  margin-top: 10px;
 `
 const Career = styled(MeNoun)`
   color: ${COLORS.limeGreen};
+`
+const Passion = styled(MeNoun)`
+  color: ${COLORS.lightYellow};
 `
 const Heritage = styled(MeNoun)`
   color: ${COLORS.scarlett};
@@ -75,15 +97,5 @@ const HumanRole = styled(MeNoun)`
 `
 const Identity = styled(MeNoun)`
   color: #4046FF;
-`
-const Hobby = styled(MeNoun)`
-  color: ${COLORS.lightYellow};
-`
-
-const HoverText = styled.span`
-  animation: fadeIn 0.3s ease-in-out;
-`
-const UnHoverText = styled.span`
-  animation: fadeIn 0.3s ease-in-out;
 `
 

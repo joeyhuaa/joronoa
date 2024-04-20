@@ -1,34 +1,53 @@
+import React from 'react'
 import styled from 'styled-components'
-import Image from 'next/image'
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { COLORS } from '@/constants'
 
-export default function Project({
-  imgSrc,
+interface Project {
+  title: string,
+  description: HTMLParagraphElement,
+  technologies: string[],
+  links?: string[]
+}
+
+const Project: React.FC<Project> = ({
+  title,
   description,
-}) {
-  const isMobile = useMediaQuery('(max-width:450px)')
-
+  technologies,
+  links,
+}) => {
   return (
     <div style={{
       width: '100%',
-      marginBottom: '70px',
+      marginBottom: '30px',
       display: 'flex',
-      flexDirection: isMobile ? 'column' : 'row',
+      flexDirection: 'column',
     }}>
-      <Image 
-        style={{marginBottom: isMobile ? '30px' : 0}}
-        src={imgSrc}
-        alt={imgSrc}
-        width={isMobile ? 300 : 200}
-        height={300}
-      />
-      <Description>
-        {description}
-      </Description>
+      <Title><b>{title}</b></Title>
+      <Technologies>
+        {technologies?.map(tech => <Technology>{tech}</Technology>)}
+      </Technologies>
+      <Description>{description}</Description>
     </div>
   )
 }
 
+export default Project
+
+const Title = styled.p`
+  font-size: 20px;
+  color: ${COLORS.lightYellow}
+`
+const Technologies = styled.div`
+  display: flex;
+`
+const Technology = styled.mark`
+  color: whitesmoke;
+  background-color: ${COLORS.scarlett};
+  margin-right: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: 14px;
+`
 const Description = styled.p`
-  margin-left: 30px;
+  margin-top: 10px;
 `
