@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import { PlayArrow, Pause } from '@mui/icons-material'
+import getRandomInt from '@/util/getRandomInt'
+import { COLORS } from '@/constants'
 
 function MusicPlayer() {
   const music = useRef(null)
@@ -9,27 +11,39 @@ function MusicPlayer() {
   const timelinePast = useRef(null)
   const pButton = useRef(null)
 
+  const [songs, setSongs] = useState([])
   const [currSong, setCurrSong] = useState(null)
-  const [currentTime, setCurrentTime] = useState(null) //! this is prob why this component is re-rendering despite React.memo
+  const [currentTime, setCurrentTime] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [songDuration, setSongDuration] = useState(null)
 
   useEffect(() => {
-    async function getSong() {
+    async function getSongs() {
       try {
-        const res = await fetch('/api/song')
+        const res = await fetch('/api/songs')
         const data  = await res?.json()
-        console.log(data)
-        setCurrSong(data)
+        // console.log(data)
+        setSongs(data)
       } catch (err) {
         console.error('Error fetching data:', err);
       }
     }
-    getSong()
+    getSongs()
   }, [])
 
-  // can we get song duration in state before pressing play?
+  useEffect(() => { if (songs.length > 0) setCurrSong(songs[getRandomInt(songs.length)]) }, [songs])
+
+  //reset start time and timeline when new song is loaded
+  useEffect(() => { 
+    if (currSong) {
+      setCurrentTime(msString(0)) 
+      timelinePast.current.style.width = 0
+    }
+  }, [currSong])
+
+  //todo - an we get song duration in state before pressing play? not working atm, music.current.src is NaN until play is pressed
   useEffect(() => {
+    // console.log('music',music.current.src)
     if (music?.current?.src) {
       setSongDuration(music.current.duration)
     }
@@ -51,13 +65,12 @@ function MusicPlayer() {
 
   let getTimeLineWidth = () => timeline?.current?.offsetWidth
 
-  //todo
-  // let queueNextSong = () => {
-  //     let nextSong = songs[Math.floor(Math.random() * songs.length)]
-  //     if (nextSong.id === currSong.id) queueNextSong()
-  //     else setCurrSong(nextSong)
-  //     console.log('queued ' + nextSong.name)
-  // }
+  let queueNextSong = () => {
+      let nextSong = songs[getRandomInt(songs.length)]
+      if (nextSong.Key === currSong.Key) queueNextSong()
+      else setCurrSong(nextSong)
+      console.log('queued ' + nextSong.name)
+  }
 
   let timeUpdate = () => {
     // update the timeline UI
@@ -68,7 +81,7 @@ function MusicPlayer() {
     setCurrentTime( msString(getCurrentTime()) )
     if ( getCurrentTime() === getDuration() ) {
       setIsPlaying(false)
-      // queueNextSong() //todo
+      queueNextSong()
     }
   }
 
@@ -89,6 +102,10 @@ function MusicPlayer() {
 
   return (
     <Container id='player_container'>
+      <Blurb>
+        Listen to music by <b>Joronoa</b> (me)
+      </Blurb>
+
       <audio
         id='music'
         ref={music}
@@ -137,6 +154,14 @@ const Container = styled.section`
   position: fixed;
   bottom: 20px;
 `
+const Blurb = styled.span`
+  font-size: 16px;
+  color: ${COLORS.lightYellow};
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%); /* Centers the item vertically */
+`
 const SongTitle = styled.span`
   font-size: 12px;
   font-weight: bold;
@@ -146,6 +171,7 @@ const PButton = styled.div`
   width: 20px;
   height: 20px;
   margin-left: 20px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

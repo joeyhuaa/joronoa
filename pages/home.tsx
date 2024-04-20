@@ -3,6 +3,7 @@ import Pics from '@/components/Pics'
 import { useState } from 'react'
 import styled from 'styled-components'
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { COLORS } from '@/constants';
 
 export default function Home() {
   const [nameHovered, setNameHovered] = useState(false)
@@ -64,10 +65,10 @@ const MeNoun = styled.p<{ isMobile: boolean }>`
   font-size: ${props => props.isMobile ? '20px' : '25px'};
 `
 const Career = styled(MeNoun)`
-  color: #66FF8A;
+  color: ${COLORS.limeGreen};
 `
 const Heritage = styled(MeNoun)`
-  color: #FF6242;
+  color: ${COLORS.scarlett};
 `
 const HumanRole = styled(MeNoun)`
   color: #52C5FF;
@@ -76,7 +77,7 @@ const Identity = styled(MeNoun)`
   color: #4046FF;
 `
 const Hobby = styled(MeNoun)`
-  color: #FFF79C;
+  color: ${COLORS.lightYellow};
 `
 
 const HoverText = styled.span`
