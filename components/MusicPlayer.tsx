@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useMediaQuery } from '@mui/material'
 import styled from 'styled-components'
 import moment from 'moment'
 import { PlayArrow, Pause } from '@mui/icons-material'
 import getRandomInt from '@/util/getRandomInt'
 import { COLORS } from '@/constants'
+import HoverText from './Hovertext'
 
 function MusicPlayer() {
   const music = useRef(null)
@@ -16,6 +18,8 @@ function MusicPlayer() {
   const [currentTime, setCurrentTime] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [songDuration, setSongDuration] = useState(null)
+
+  const isMobile = useMediaQuery('(max-width:450px)')
 
   useEffect(() => {
     async function getSongs() {
@@ -100,11 +104,31 @@ function MusicPlayer() {
     else return `${m}:${s}`
   };
 
+  //styles
+  const webStyles = {
+    container: { justifyContent:'center' },
+    pButton: { width: '20px', height: '20px', marginLeft: '20px', marginRight: '20px' },
+    timeline: { width: '400px', height: '5px' }
+  }
+  const mobileStyles = {
+    container: { justifyContent:'space-between' },
+    pButton: { justifySelf:'flex-end', paddingRight:'10px' },
+    timeline: { width: '100%', height: '2.5px', position: 'fixed', bottom: 0 }
+  }
+
   return (
-    <Container id='player_container'>
-      <Blurb>
-        Listen to music by <b>Joronoa</b> (me)
-      </Blurb>
+    <Container id='player_container' style={isMobile ? mobileStyles.container : webStyles.container}>
+      {!isMobile &&
+        <Blurb>
+          Listen to music by 
+          <a href='https://open.spotify.com/artist/1zEBlYdwmgdTZAOHE753V2?si=T84NnR93TMOao-aTDgs6ng' target='_blank'>
+            <b style={{color: COLORS.scarlett}}> 
+              <HoverText hoverText=' Joronoa ' unhoverText=' Joronoa ' />
+            </b>
+          </a> 
+          (me)
+        </Blurb>
+      }
 
       <audio
         id='music'
@@ -114,28 +138,25 @@ function MusicPlayer() {
       />
 
       <SongTitle>
-        {currSong ? currSong.name : null}
+        <span style={{color:'whitesmoke', fontSize:'14px'}}>{currSong ? currSong.name : null}</span>
+        {isMobile && <p>Joronoa</p>}
       </SongTitle>
 
-      <PButton ref={pButton} onClick={() => playPause()}>
+      <PButton ref={pButton} onClick={() => playPause()} style={isMobile ? mobileStyles.pButton : webStyles.pButton}>
         {isPlaying ? (
-          <Pause />
+          <Pause fontSize='large' style={{color:'whitesmoke'}} />
         ) : (
-          <PlayArrow />
+          <PlayArrow fontSize='large' style={{color:'whitesmoke'}} />
         )}
       </PButton>
 
-      <Timestamp>
-        {currentTime || `-:--`}
-      </Timestamp>
+      {!isMobile && <Timestamp>{currentTime || `-:--`}</Timestamp>}
 
-      <Timeline ref={timeline} onClick={e => timeLineClicked(e)}>
+      <Timeline ref={timeline} onClick={e => timeLineClicked(e)} style={isMobile ? mobileStyles.timeline : webStyles.timeline}>
         <TimelinePast ref={timelinePast} />
       </Timeline>
 
-      <Timestamp>
-        {msString(getDuration()) || `-:--`}
-      </Timestamp>
+      {!isMobile && <Timestamp>{msString(getDuration()) || `-:--`}</Timestamp>}
     </Container>
   )
 }
@@ -146,7 +167,6 @@ const Container = styled.section`
   width: 100vw;
   display: flex;
   align-items: center;
-  justify-content: center;
   z-index: 1;
   flex: 100%;
   align-self: flex-end;
@@ -164,14 +184,10 @@ const Blurb = styled.span`
 `
 const SongTitle = styled.span`
   font-size: 12px;
-  font-weight: bold;
+  // font-weight: bold;
   margin-left: 1em;
 `
 const PButton = styled.div`
-  width: 20px;
-  height: 20px;
-  margin-left: 20px;
-  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,14 +200,10 @@ const Timestamp = styled.span`
   text-align: center;
 `
 const Timeline = styled.div`
-  width: 400px;
-  height: 5px;
-  margin: 0 5px;
   background: #353535;
   border-radius: 15px;
   display: flex;
-  align-items: center;
-  position: relative;
+  alignItems: center;
   &:hover { cursor: pointer; }
 `
 const TimelinePast = styled.div`
